@@ -5,6 +5,7 @@ Takes extracted features from audio and feed it to the elasticsearch apis,
 which eventually creates and stores index of all extracted features.
 """
 
+import os
 import json
 from elasticsearch import Elasticsearch
 
@@ -54,3 +55,23 @@ class Feeder:
         ret = self.es.index(index=iname, doc_type, cont_id, body=content)
         retVal = ret['created']
         return retVal
+
+    def feedAll(self, jsonDir, iname="audio_index", doc_type="audio"):
+        """
+        feed extracted features of all audio from all the files present in
+        jsonDir to elasticsearch for index creation
+
+        Input:
+            - jsonDir : directory path that contains all json files
+            - iname   : index name for that group of content
+            - doc_type: document type to be stored
+        """
+        basepath = jsonDir
+        jsonFiles = os.listdir(jsonDir)
+
+        for fname in jsonFiles:
+            # content id is extracted from the file name
+            # file name is of format: id.json
+            cont_id = fname.split(".")[0]
+            fpath = os.path.join(basepath, fname)
+            self.feed(fpath, cont_id, iname, doc_type)
