@@ -52,7 +52,8 @@ class Feeder:
                       false.
         """
         content = self.readContent(jsonFile)
-        ret = self.es.index(index=iname, doc_type, cont_id, body=content)
+        ret = self.es.index(index=iname, doc_type=doc_type,
+                            id=cont_id, body=content)
         retVal = ret['created']
         return retVal
 
