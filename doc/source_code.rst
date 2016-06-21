@@ -1,0 +1,25 @@
+Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code
+==========================================================================================
+
+Feed module
+-----------
+
+.. automodule:: feed
+   :members:
+
+Peragro module
+--------------
+
+.. automodule:: peragro
+   :members:
+
+Test Feed module
+----------------
+
+.. automodule:: test_feed
+   :members:
+
+Test Peragro module
+--------------------
+
+.. automodule:: test_peragro
