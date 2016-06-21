@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS) &mdash; peragro_airs 1.0 documentation</title>
+    <title>Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code &mdash; peragro_airs 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,8 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="peragro_airs 1.0 documentation" href="index.html" />
-    <link rel="next" title="Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code" href="source_code.html" />
-    <link rel="prev" title="Welcome to peragro_airs’s documentation!" href="index.html" /> 
+    <link rel="prev" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)" href="code.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,10 +38,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="source_code.html" title="Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to peragro_airs’s documentation!"
+          <a href="code.html" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -53,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="api-s-documentation-of-peragro-at-audio-information-retrieval-system-airs">
-<h1>API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)<a class="headerlink" href="#api-s-documentation-of-peragro-at-audio-information-retrieval-system-airs" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="auto-generated-documentation-of-peragro-at-audio-information-retrieval-system-airs-code">
+<h1>Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code<a class="headerlink" href="#auto-generated-documentation-of-peragro-at-audio-information-retrieval-system-airs-code" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-feed">
 <span id="feed-module"></span><h2>Feed module<a class="headerlink" href="#module-feed" title="Permalink to this headline">¶</a></h2>
 <p>Feeder module</p>
@@ -184,6 +180,102 @@ It also has support for field queries.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-test_feed">
+<span id="test-feed-module"></span><h2>Test Feed module<a class="headerlink" href="#module-test_feed" title="Permalink to this headline">¶</a></h2>
+<p>Test Feeder module</p>
+<p>Provides test methods for automated unit testing of Feeder module</p>
+<dl class="class">
+<dt id="test_feed.TestFeeder">
+<em class="property">class </em><tt class="descclassname">test_feed.</tt><tt class="descname">TestFeeder</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test Feeder class for unittesting Feeder module</p>
+<dl class="method">
+<dt id="test_feed.TestFeeder.id_generator">
+<tt class="descname">id_generator</tt><big>(</big><em>size=10</em>, <em>chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'</em><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder.id_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder.id_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate random token of given size</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_feed.TestFeeder.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>set up method for test fixture</p>
+<p>This method runs before each test method. Basically,
+it setups the test environment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_feed.TestFeeder.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder.tearDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>set up tear down method for test fixture</p>
+<p>This method runs after each test method and cleans
+the test environment created in setUp method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_feed.TestFeeder.test_feed">
+<tt class="descname">test_feed</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder.test_feed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder.test_feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests feed method of Feeder object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_feed.TestFeeder.test_readContent">
+<tt class="descname">test_readContent</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_feed.html#TestFeeder.test_readContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_feed.TestFeeder.test_readContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests readContent method of Feeder object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-test_peragro">
+<span id="test-peragro-module"></span><h2>Test Peragro module<a class="headerlink" href="#module-test_peragro" title="Permalink to this headline">¶</a></h2>
+<p>Test peragro module</p>
+<p>provides test methods for automated unittesting of peragro module</p>
+<dl class="class">
+<dt id="test_peragro.TestPeragroClient">
+<em class="property">class </em><tt class="descclassname">test_peragro.</tt><tt class="descname">TestPeragroClient</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>unit test PeragroClient module</p>
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.feed_data">
+<tt class="descname">feed_data</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.feed_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.feed_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper method to feed data to elasticsearch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>set up method for test fixture</p>
+<p>This method runs before each test method. Basically,
+it setups the test environment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.tearDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>setting up tear down method for test fixture</p>
+<p>This method runs after each test method and cleans
+the test environment created in setUp method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.test_get_sound">
+<tt class="descname">test_get_sound</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.test_get_sound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.test_get_sound" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests get_sound method of PeragroClient object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.test_set_index">
+<tt class="descname">test_set_index</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.test_set_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.test_set_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests set_index method of PeragroClient object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="test_peragro.TestPeragroClient.test_text_search">
+<tt class="descname">test_text_search</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/test_peragro.html#TestPeragroClient.test_text_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#test_peragro.TestPeragroClient.test_text_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>tests text_search method of PeragroClient object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -194,22 +286,21 @@ It also has support for field queries.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)</a><ul>
+<li><a class="reference internal" href="#">Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code</a><ul>
 <li><a class="reference internal" href="#module-feed">Feed module</a></li>
 <li><a class="reference internal" href="#module-peragro">Peragro module</a></li>
+<li><a class="reference internal" href="#module-test_feed">Test Feed module</a></li>
+<li><a class="reference internal" href="#module-test_peragro">Test Peragro module</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to peragro_airs&#8217;s documentation!</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="source_code.html"
-                        title="next chapter">Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code</a></p>
+  <p class="topless"><a href="code.html"
+                        title="previous chapter">API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="_sources/code.txt"
+    <li><a href="_sources/source_code.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -239,10 +330,7 @@ It also has support for field queries.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="source_code.html" title="Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to peragro_airs’s documentation!"
+          <a href="code.html" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)"
              >previous</a> |</li>
         <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
       </ul>

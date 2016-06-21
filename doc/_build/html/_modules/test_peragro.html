@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>test_peragro &mdash; peragro_airs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="peragro_airs 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">peragro_airs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for test_peragro</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Test peragro module</span>
+
+<span class="sd">provides test methods for automated unittesting of peragro module</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">peragro</span> <span class="kn">import</span> <span class="n">PeragroClient</span>
+<span class="c"># from elasticsearch import Elasticsearch</span>
+
+
+<div class="viewcode-block" id="TestPeragroClient"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient">[docs]</a><span class="k">class</span> <span class="nc">TestPeragroClient</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    unit test PeragroClient module</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestPeragroClient.setUp"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set up method for test fixture</span>
+
+<span class="sd">        This method runs before each test method. Basically,</span>
+<span class="sd">        it setups the test environment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># self.es = Elasticsearch()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">PeragroClient</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="s">&quot;temp_index&quot;</span>
+</div>
+<div class="viewcode-block" id="TestPeragroClient.feed_data"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.feed_data">[docs]</a>    <span class="k">def</span> <span class="nf">feed_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        helper method to feed data to elasticsearch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="s">&quot;temp_index&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">&#39;singer&#39;</span><span class="p">:</span> <span class="s">&#39;Ellie Goulding&#39;</span><span class="p">,</span>
+                <span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&#39;love me like you do&#39;</span><span class="p">,</span>
+                <span class="s">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;cherrytree&#39;</span><span class="p">,</span> <span class="s">&#39;interscope&#39;</span><span class="p">,</span> <span class="s">&#39;republic&#39;</span><span class="p">],</span>
+                <span class="s">&#39;release&#39;</span><span class="p">:</span> <span class="s">&#39;7 January 2015&#39;</span><span class="p">,</span>
+                <span class="s">&#39;genre&#39;</span><span class="p">:</span> <span class="s">&#39;electropop&#39;</span><span class="p">,</span>
+                <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="mf">4.12</span><span class="p">,</span>
+                <span class="s">&#39;awesomeness&#39;</span><span class="p">:</span> <span class="mf">0.8</span>
+        <span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">&#39;singer&#39;</span><span class="p">:</span> <span class="s">&#39;Eminem&#39;</span><span class="p">,</span>
+                <span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&#39;love the way you lie&#39;</span><span class="p">,</span>
+                <span class="s">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Aftermath&#39;</span><span class="p">,</span> <span class="s">&#39;Interscope&#39;</span><span class="p">,</span> <span class="s">&#39;shady&#39;</span><span class="p">],</span>
+                <span class="s">&#39;release&#39;</span><span class="p">:</span> <span class="s">&#39;9 August 2010&#39;</span><span class="p">,</span>
+                <span class="s">&#39;genre&#39;</span><span class="p">:</span> <span class="s">&#39;hip hop&#39;</span><span class="p">,</span>
+                <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="mf">4.22</span><span class="p">,</span>
+                <span class="s">&#39;awesomeness&#39;</span><span class="p">:</span> <span class="mf">0.6</span>
+        <span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">&#39;singer&#39;</span><span class="p">:</span> <span class="s">&#39;Arijith Singh&#39;</span><span class="p">,</span>
+                <span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&#39;Tum hi ho&#39;</span><span class="p">,</span>
+                <span class="s">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;romantic&#39;</span><span class="p">,</span> <span class="s">&#39;movie song track&#39;</span><span class="p">],</span>
+                <span class="s">&#39;release&#39;</span><span class="p">:</span> <span class="s">&#39;2 April 2013&#39;</span><span class="p">,</span>
+                <span class="s">&#39;genre&#39;</span><span class="p">:</span> <span class="s">&#39;romantic&#39;</span><span class="p">,</span>
+                <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="mf">4.15</span><span class="p">,</span>
+                <span class="s">&#39;awesomeness&#39;</span><span class="p">:</span> <span class="mf">0.95</span>
+        <span class="p">})</span>
+</div>
+<div class="viewcode-block" id="TestPeragroClient.tearDown"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        setting up tear down method for test fixture</span>
+
+<span class="sd">        This method runs after each test method and cleans</span>
+<span class="sd">        the test environment created in setUp method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># clean everything stored with temp_index in elastic search</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;temp_index&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">es</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;temp_index&#39;</span><span class="p">)</span>
+        <span class="c"># del self.es</span>
+        <span class="c"># del self.client</span>
+</div>
+<div class="viewcode-block" id="TestPeragroClient.test_set_index"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.test_set_index">[docs]</a>    <span class="k">def</span> <span class="nf">test_set_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests set_index method of PeragroClient object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="s">&quot;12ABC54F&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestPeragroClient.test_get_sound"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.test_get_sound">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests get_sound method of PeragroClient object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feed_data</span><span class="p">()</span>
+
+        <span class="c"># print &quot;testing get sound&quot;</span>
+        <span class="c"># print self.c.es.indices.exists(index=&#39;temp_index&#39;)</span>
+        <span class="c"># print self.c.es.search(index=&#39;temp_index&#39;, q=&#39;tum hi&#39;)</span>
+        <span class="c"># test when song with that id exists</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="s">&#39;2&#39;</span>
+        <span class="n">sound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">get_sound</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
+        <span class="c"># print &quot;sound is&quot;</span>
+        <span class="c"># print sound</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">id_</span><span class="p">,</span> <span class="n">sound</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">])</span>
+
+        <span class="c"># test when song with that id doesn&#39;t exists</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">sound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">get_sound</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">sound</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestPeragroClient.test_text_search"><a class="viewcode-back" href="../source_code.html#test_peragro.TestPeragroClient.test_text_search">[docs]</a>    <span class="k">def</span> <span class="nf">test_text_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        tests text_search method of PeragroClient object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feed_data</span><span class="p">()</span>
+        <span class="c"># test simple query</span>
+
+        <span class="c"># test when result present</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;tum hi ho&quot;</span>
+        <span class="c"># print self.c.es.search(index=&#39;temp_index&#39;, q=query)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">total_hits</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;total&#39;</span><span class="p">]</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;_id&#39;</span><span class="p">]</span>
+        <span class="n">exp_hits</span><span class="p">,</span> <span class="n">exp_id</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">exp_hits</span><span class="p">,</span> <span class="n">total_hits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">exp_id</span><span class="p">,</span> <span class="n">id_</span><span class="p">)</span>
+
+        <span class="c"># test when no result</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;da da da&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">total_hits</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;total&#39;</span><span class="p">]</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;hits&#39;</span><span class="p">])</span>
+        <span class="n">exp_hits</span><span class="p">,</span> <span class="n">exp_count</span> <span class="o">=</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">exp_hits</span><span class="p">,</span> <span class="n">total_hits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">exp_count</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+        <span class="c"># test the case of field query</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;tags:&#39;interscope&#39; genre:&#39;hip hop&#39;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">total_hits</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;total&#39;</span><span class="p">]</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;_id&#39;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="s">&#39;hits&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;_id&#39;</span><span class="p">]]</span>
+        <span class="n">exp_hits</span> <span class="o">=</span> <span class="s">&#39;2&#39;</span>
+        <span class="n">exp_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">exp_hits</span><span class="p">,</span> <span class="n">total_hits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertListEqual</span><span class="p">(</span><span class="n">exp_ids</span><span class="p">,</span> <span class="n">ids</span><span class="p">)</span>
+
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">peragro_airs 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Abhishek Singh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to peragro_airs’s documentation! &mdash; peragro_airs 1.0 documentation</title>
+    <title>Peragro Audio Information Retrieval System (PAIRS) documentation! &mdash; peragro_airs 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,8 +49,48 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-peragro-airs-s-documentation">
-<h1>Welcome to peragro_airs&#8217;s documentation!<a class="headerlink" href="#welcome-to-peragro-airs-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="peragro-audio-information-retrieval-system-pairs-documentation">
+<h1>Peragro Audio Information Retrieval System (PAIRS) documentation!<a class="headerlink" href="#peragro-audio-information-retrieval-system-pairs-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<p>“Search, and you will find”</p>
+<p>Implementation of an audio search system for Peragro. An Audio Information
+Retrieval(AIR) system that would provide client API(s) for audio search and
+information retrieval. Search will be based on annotated text/descriptions or
+tags/labels associated with an audio as well as on low and high level features.
+Focus is to implement an AIR system that provides text based and content based
+search. Users would be able to perform query through the provided client API(s)
+and will get list of relevant audios in return.</p>
+</div>
+<div class="section" id="benefits">
+<h3>Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Provides client API(s) for text and content based search. Query can be done
+by providing some text or by submitting a piece of audio.</li>
+<li>Support for advanced queries combining content analysis features and other
+metadata (tags, etc) including filters and group-by options.</li>
+<li>Support for duplication detection. It helps in finding duplicate entries in
+the collection.</li>
+<li>Helps in finding relevant audios quickly and efficiently.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Elastic search (storage database)</li>
+<li>elastic-py library</li>
+<li>Kibana (data visualization)</li>
+<li>Python 2.7.x/C</li>
+<li>Scikit, Keras</li>
+<li>Coverage</li>
+<li>Pep8</li>
+<li>Pyflakes</li>
+<li>Sphinx (documentation)</li>
+<li>Python Unit-testing framework</li>
+</ul>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -59,7 +99,15 @@
 <li class="toctree-l2"><a class="reference internal" href="code.html#module-peragro">Peragro module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="source_code.html">Auto generated documentation of Peragro AT: Audio Information Retrieval System (AIRS) code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source_code.html#module-feed">Feed module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source_code.html#module-peragro">Peragro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source_code.html#module-test_feed">Test Feed module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source_code.html#module-test_peragro">Test Peragro module</a></li>
 </ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -79,7 +127,15 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to peragro_airs&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#">Peragro Audio Information Retrieval System (PAIRS) documentation!</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#benefits">Benefits</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

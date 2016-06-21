@@ -3,11 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to peragro_airs's documentation!
-========================================
+Peragro Audio Information Retrieval System (PAIRS) documentation!
+============================================================================
 
-Abstract
---------
+Introduction
+-------------
+
+Purpose
+********
 
 “Search, and you will find”
 
@@ -19,6 +22,30 @@ Focus is to implement an AIR system that provides text based and content based
 search. Users would be able to perform query through the provided client API(s)
 and will get list of relevant audios in return.
 
+Benefits
+********
+
+* Provides client API(s) for text and content based search. Query can be done
+  by providing some text or by submitting a piece of audio.
+* Support for advanced queries combining content analysis features and other
+  metadata (tags, etc) including filters and group-by options.
+* Support for duplication detection. It helps in finding duplicate entries in
+  the collection.
+* Helps in finding relevant audios quickly and efficiently.
+
+Software Requirements
+---------------------
+
+* Elastic search (storage database)
+* elastic-py library
+* Kibana (data visualization)
+* Python 2.7.x/C
+* Scikit, Keras
+* Coverage
+* Pep8
+* Pyflakes
+* Sphinx (documentation)
+* Python Unit-testing framework
 
 
 Contents:
