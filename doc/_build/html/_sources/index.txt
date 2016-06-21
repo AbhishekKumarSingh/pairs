@@ -53,6 +53,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   visualize
    code
    source_code
 

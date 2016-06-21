@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Audio Data Visualization/Analytics Using Kibana &mdash; peragro_airs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="peragro_airs 1.0 documentation" href="index.html" />
+    <link rel="next" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)" href="code.html" />
+    <link rel="prev" title="Peragro Audio Information Retrieval System (PAIRS) documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Peragro Audio Information Retrieval System (PAIRS) documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="audio-data-visualization-analytics-using-kibana">
+<h1>Audio Data Visualization/Analytics Using Kibana<a class="headerlink" href="#audio-data-visualization-analytics-using-kibana" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Kibana is an open source analytics and visualization platform designed to work
+with Elasticsearch. Kibana can be used to search, view, and interact with data
+stored in Elasticsearch indices. We can easily perform advanced data analysis
+and visualize our data in a variety of charts, tables, and maps format.</p>
+<p>Kibana makes it easy to understand large volumes of data. Its simple,
+browser-based interface enables us to quickly create and share dynamic
+dashboards that display changes to Elasticsearch queries in real time.</p>
+<p>We can install Kibana and start exploring our Elasticsearch indices in
+minutes without any code, or any additional infrastructure required.</p>
+</div>
+<div class="section" id="getting-kibana-up">
+<h2>Getting Kibana up<a class="headerlink" href="#getting-kibana-up" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements">
+<h3>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Elasticsearch 2.3 or later</li>
+<li>A modern web browser</li>
+<li>Information about our Elasticsearch installation:<ul>
+<li>URL of the Elasticsearch instance we want to connect to.</li>
+<li>Which Elasticsearch indices we want to search.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="install-and-start-kibana">
+<h3>Install and start Kibana<a class="headerlink" href="#install-and-start-kibana" title="Permalink to this headline">¶</a></h3>
+<p>Installing kibana with apt-get</p>
+<ol class="arabic">
+<li><p class="first">Download and install the Public Signing Key:</p>
+<div class="highlight-bash"><div class="highlight"><pre>wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the repository definition to your /etc/apt/sources.list.d/kibana.list
+file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">echo</span> <span class="s2">&quot;deb http://packages.elastic.co/kibana/4.5/debian stable main&quot;</span> | sudo tee -a /etc/apt/sources.list
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run apt-get update and the repository is ready for use. Install Kibana with
+the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install kibana
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configure Kibana to automatically start during bootup. If your distribution
+is using the System V version of init, run the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo update-rc.d kibana defaults 95 10
+</pre></div>
+</div>
+</li>
+<li><p class="first">start kibana</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo service kibana start
+</pre></div>
+</div>
+</li>
+</ol>
+<p>That’s it! Kibana is now running on port 5601. You can access the kibana UI by
+pointing your browser to:</p>
+<div class="highlight-bash"><div class="highlight"><pre>http://localhost:5601
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-an-index-pattern">
+<h2>Configuring an index pattern<a class="headerlink" href="#configuring-an-index-pattern" title="Permalink to this headline">¶</a></h2>
+<p>remove check from <cite>Index contains time-based events</cite> and put Index name or
+pattern (as used in elasticsearch) and start.</p>
+<p>Now, we are in position to visualize and analyze data stored at that index.</p>
+<p>Something which we can do is:</p>
+<ul class="simple">
+<li>Search and browse your data interactively from the Discover page.</li>
+<li>Chart and map your data from the Visualize page.</li>
+<li>Create and view custom dashboards from the Dashboard page.</li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References:<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>Follow the tutorial for more info at
+<a class="reference external" href="https://www.elastic.co/guide/en/kibana/current/introduction.html">https://www.elastic.co/guide/en/kibana/current/introduction.html</a></p>
+<p>For a brief tutorial that explores these core Kibana concepts, take a look at
+the Getting Started page at
+<a class="reference external" href="https://www.elastic.co/guide/en/kibana/current/getting-started.html">https://www.elastic.co/guide/en/kibana/current/getting-started.html</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Audio Data Visualization/Analytics Using Kibana</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#getting-kibana-up">Getting Kibana up</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements:</a></li>
+<li><a class="reference internal" href="#install-and-start-kibana">Install and start Kibana</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-an-index-pattern">Configuring an index pattern</a></li>
+<li><a class="reference internal" href="#references">References:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Peragro Audio Information Retrieval System (PAIRS) documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code.html"
+                        title="next chapter">API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/visualize.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code.html" title="API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Peragro Audio Information Retrieval System (PAIRS) documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Abhishek Singh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
