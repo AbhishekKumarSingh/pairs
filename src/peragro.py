@@ -38,6 +38,7 @@ class PeragroClient():
             -sound: sound details if it exists otherwise None
 
         Usage:
+
         >>> id = "X2VFAB12GH"
         >>> sound = c.get_sound(id)
         """
@@ -53,6 +54,7 @@ class PeragroClient():
         It also has support for field queries.
 
         Usage:
+
         >>> query = "tum hi ho"
         >>> sounds = c.text_search(query)
 
