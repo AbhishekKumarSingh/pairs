@@ -1,0 +1,108 @@
+Audio Data Visualization/Analytics Using Kibana
+================================================
+
+Introduction
+-------------
+
+Kibana is an open source analytics and visualization platform designed to work
+with Elasticsearch. Kibana can be used to search, view, and interact with data
+stored in Elasticsearch indices. We can easily perform advanced data analysis
+and visualize our data in a variety of charts, tables, and maps format.
+
+Kibana makes it easy to understand large volumes of data. Its simple,
+browser-based interface enables us to quickly create and share dynamic
+dashboards that display changes to Elasticsearch queries in real time.
+
+We can install Kibana and start exploring our Elasticsearch indices in
+minutes without any code, or any additional infrastructure required.
+
+Getting Kibana up
+-------------------
+
+Requirements:
+*************
+
+* Elasticsearch 2.3 or later 
+* A modern web browser
+*  Information about our Elasticsearch installation:
+
+   * URL of the Elasticsearch instance we want to connect to.
+   * Which Elasticsearch indices we want to search.
+
+Install and start Kibana
+**************************
+
+Installing kibana with apt-get
+
+1. Download and install the Public Signing Key:
+   
+   
+   ```bash
+   wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key
+   add -
+   ```
+
+2. Add the repository definition to your /etc/apt/sources.list.d/kibana.list
+   file:
+
+
+   ```bash
+   echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo
+   tee -a /etc/apt/sources.list
+   ```
+
+3. Run apt-get update and the repository is ready for use. Install Kibana with
+   the following command:
+
+
+   ```bash
+   sudo apt-get update && sudo apt-get install kibana
+   ```
+
+4.  Configure Kibana to automatically start during bootup. If your distribution
+    is using the System V version of init, run the following command:
+
+
+    ```bash
+    sudo update-rc.d kibana defaults 95 10
+    ```
+
+5. start kibana
+
+
+   ```bash
+   sudo service kibana start
+   ```
+
+
+That’s it! Kibana is now running on port 5601. You can access the kibana UI by
+pointing your browser to:
+
+```
+http://localhost:5601
+```
+
+
+Configuring an index pattern
+-----------------------------
+
+remove check from `Index contains time-based events` and put Index name or
+pattern (as used in elasticsearch) and start.
+
+Now, we are in position to visualize and analyze data stored at that index.
+
+Something which we can do is:
+
+* Search and browse your data interactively from the Discover page.
+* Chart and map your data from the Visualize page.
+* Create and view custom dashboards from the Dashboard page.
+
+
+References:
+------------
+Follow the tutorial for more info at
+https://www.elastic.co/guide/en/kibana/current/introduction.html
+
+For a brief tutorial that explores these core Kibana concepts, take a look at
+the Getting Started page at
+https://www.elastic.co/guide/en/kibana/current/getting-started.html
