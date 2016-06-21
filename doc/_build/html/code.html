@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS) &mdash; peragro_airs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="peragro_airs 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to peragro_airs’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to peragro_airs’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api-s-documentation-of-peragro-at-audio-information-retrieval-system-airs">
+<h1>API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)<a class="headerlink" href="#api-s-documentation-of-peragro-at-audio-information-retrieval-system-airs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-feed">
+<span id="feed-module"></span><h2>Feed module<a class="headerlink" href="#module-feed" title="Permalink to this headline">¶</a></h2>
+<p>Feeder module</p>
+<p>Takes extracted features from audio and feed it to the elasticsearch apis,
+which eventually creates and stores index of all extracted features.</p>
+<dl class="class">
+<dt id="feed.Feeder">
+<em class="property">class </em><tt class="descclassname">feed.</tt><tt class="descname">Feeder</tt><a class="reference internal" href="_modules/feed.html#Feeder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feed.Feeder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feeder class that provides helper functions to feed extracted
+features to the elasticsearch inorder to create indexes.</p>
+<dl class="method">
+<dt id="feed.Feeder.feed">
+<tt class="descname">feed</tt><big>(</big><em>jsonFile</em>, <em>cont_id</em>, <em>iname='audio_index'</em>, <em>doc_type='audio'</em><big>)</big><a class="reference internal" href="_modules/feed.html#Feeder.feed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feed.Feeder.feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>feed extracted features of an audio to elasticsearch for index creation</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><ul class="first last simple">
+<li>jsonFile: a json file of extracted features of an audio</li>
+<li>cont_id : identity of the content</li>
+<li>iname   : index name for that group of content</li>
+<li>doc_type: document type to be stored</li>
+</ul>
+</dd>
+<dt>output:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>retVal: a boolean return value. true if data is indexed otherwise</dt>
+<dd><p class="first last">false.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feed.Feeder.feedAll">
+<tt class="descname">feedAll</tt><big>(</big><em>jsonDir</em>, <em>iname='audio_index'</em>, <em>doc_type='audio'</em><big>)</big><a class="reference internal" href="_modules/feed.html#Feeder.feedAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feed.Feeder.feedAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>feed extracted features of all audio from all the files present in
+jsonDir to elasticsearch for index creation</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><ul class="first last simple">
+<li>jsonDir : directory path that contains all json files</li>
+<li>iname   : index name for that group of content</li>
+<li>doc_type: document type to be stored</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="feed.Feeder.readContent">
+<tt class="descname">readContent</tt><big>(</big><em>jsonFile</em><big>)</big><a class="reference internal" href="_modules/feed.html#Feeder.readContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feed.Feeder.readContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts json data to dictionary format</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd><ul class="first last simple">
+<li>jsonFile: a json file containing extracted features of an audio</li>
+</ul>
+</dd>
+<dt>output:</dt>
+<dd><ul class="first last simple">
+<li>content: features stored in dictionary format</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-peragro">
+<span id="peragro-module"></span><h2>Peragro module<a class="headerlink" href="#module-peragro" title="Permalink to this headline">¶</a></h2>
+<p>A client that provides audio search</p>
+<p>provides different api(s) for audio search, including text based and content
+based search.</p>
+<dl class="class">
+<dt id="peragro.PeragroClient">
+<em class="property">class </em><tt class="descclassname">peragro.</tt><tt class="descname">PeragroClient</tt><a class="reference internal" href="_modules/peragro.html#PeragroClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#peragro.PeragroClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>An audio search client</p>
+<dl class="method">
+<dt id="peragro.PeragroClient.get_sound">
+<tt class="descname">get_sound</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="_modules/peragro.html#PeragroClient.get_sound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#peragro.PeragroClient.get_sound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get sound by its id</p>
+<dl class="docutils">
+<dt>input:</dt>
+<dd>-id: id of sound</dd>
+<dt>output:</dt>
+<dd>-sound: sound details if it exists otherwise None</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">=</span> <span class="s">&quot;X2VFAB12GH&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sound</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_sound</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="peragro.PeragroClient.set_index">
+<tt class="descname">set_index</tt><big>(</big><em>index</em><big>)</big><a class="reference internal" href="_modules/peragro.html#PeragroClient.set_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#peragro.PeragroClient.set_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>set index for to lookup in elasticsearch</p>
+<dl class="docutils">
+<dt>Input:</dt>
+<dd>-index: an elasticsearch index</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="peragro.PeragroClient.text_search">
+<tt class="descname">text_search</tt><big>(</big><em>query</em><big>)</big><a class="reference internal" href="_modules/peragro.html#PeragroClient.text_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#peragro.PeragroClient.text_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get sound results based on text query.
+It also has support for field queries.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s">&quot;tum hi ho&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sounds</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># OR field query</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s">&quot;tags:&#39;interscope&#39; genre:&#39;hip hop&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sounds</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API(s) documentation of Peragro AT: Audio Information Retrieval System (AIRS)</a><ul>
+<li><a class="reference internal" href="#module-feed">Feed module</a></li>
+<li><a class="reference internal" href="#module-peragro">Peragro module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to peragro_airs&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/code.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to peragro_airs’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">peragro_airs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Abhishek Singh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
