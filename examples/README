@@ -1,0 +1,6 @@
+Instruction
+============
+
+To run the demo code, enter the following command
+
+$ python demo.py example_data
