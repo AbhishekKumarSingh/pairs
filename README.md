@@ -109,10 +109,16 @@ Installing kibana with apt-get
 That’s it! Kibana is now running on port 5601. You can access the kibana UI by pointing your browser to:
 http://localhost:5601
 
-## Buidling docs
+## Building docs
 
 Inside `doc` directory run
 
     $ make html
-    
-Docs is also online at: http://pairs.readthedocs.io/en/latest/ 
+
+Docs is also online at: http://pairs.readthedocs.io/en/latest/
+
+## Running examples
+
+check the examples in `examples` dir
+
+Instruction to run demo.py can be found at `examples/README` file
