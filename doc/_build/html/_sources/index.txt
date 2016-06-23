@@ -71,6 +71,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install
    visualize
    code
    source_code
