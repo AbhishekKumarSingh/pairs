@@ -91,6 +91,21 @@ the collection.</li>
 <li>Sphinx (documentation)</li>
 <li>Python Unit-testing framework</li>
 </ul>
+</div>
+<div class="section" id="phase-i-architecture-design">
+<h2>Phase I Architecture Design<a class="headerlink" href="#phase-i-architecture-design" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/arch" src="_images/arch" />
+<p>Data is pass to feeder module in json format. There are two ways for passing
+data to feeder module.</p>
+<ul class="simple">
+<li>sending data(already extracted features from AcousticBrainz) directly;</li>
+<li>First extracting features using Essentia toolkit and the produced json files
+are passed to feeder.</li>
+</ul>
+<p>Feeder parses the json files and calls the elasticsearch api(s) to create
+indexes for the features. Further PeragroClient API(s) provides method for
+quering(search) the indexes. Kibana is used to visualize, analyze and search
+the data in GUI.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -141,6 +156,7 @@ the collection.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+<li><a class="reference internal" href="#phase-i-architecture-design">Phase I Architecture Design</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

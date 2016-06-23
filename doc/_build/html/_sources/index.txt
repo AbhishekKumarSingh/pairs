@@ -47,6 +47,24 @@ Software Requirements
 * Sphinx (documentation)
 * Python Unit-testing framework
 
+Phase I Architecture Design
+----------------------------
+
+.. image:: images/arch
+
+
+Data is pass to feeder module in json format. There are two ways for passing
+data to feeder module.
+
+* sending data(already extracted features from AcousticBrainz) directly;
+* First extracting features using Essentia toolkit and the produced json files
+  are passed to feeder.
+
+Feeder parses the json files and calls the elasticsearch api(s) to create
+indexes for the features. Further PeragroClient API(s) provides method for
+quering(search) the indexes. Kibana is used to visualize, analyze and search
+the data in GUI.
+
 
 Contents:
 
