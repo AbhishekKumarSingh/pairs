@@ -88,37 +88,31 @@ Installing kibana with apt-get
 
 1. Download and install the Public Signing Key:
 
-        $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+         $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
 2. Add the repository definition to your /etc/apt/sources.list.d/kibana.list file:
 
-       $ echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+         $ echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list
 
 3. Run apt-get update and the repository is ready for use. Install Kibana with the following command:
 
-       $ sudo apt-get update && sudo apt-get install kibana
+         $ sudo apt-get update && sudo apt-get install kibana
 
 4. Configure Kibana to automatically start during bootup. If your distribution is using the System V version of init, run the following command:
 
-       $ sudo update-rc.d kibana defaults 95 10
+         $ sudo update-rc.d kibana defaults 95 10
 
 5. start kibana
 
-       $ sudo service kibana start
+         $ sudo service kibana start
 
 That’s it! Kibana is now running on port 5601. You can access the kibana UI by pointing your browser to:
 http://localhost:5601
 
-## Building docs
+## Buidling docs
 
 Inside `doc` directory run
 
     $ make html
-
-Docs is also online at: http://pairs.readthedocs.io/en/latest/
-
-## Running examples
-
-check the examples in `examples` dir
-
-Instruction to run demo.py can be found at `examples/README` file
+    
+Docs is also online at: http://pairs.readthedocs.io/en/latest/ 
