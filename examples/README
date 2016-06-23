@@ -4,3 +4,40 @@ Instruction
 To run the demo code, enter the following command
 
 $ python demo.py example_data
+
+
+examples_data directory contains 769 json files containing features for different audios.
+
+
+Query can be done by either giving an id or by giving text.
+
+Some sample queries
+--------------------
+
+Queries by id:
+
+Input: 155249
+output: 155249 found
+
+Input: 155234567
+output: 155234567 not found
+
+
+Queries by text:
+
+Input: birds
+output: Got 87 hits
+
+Input: plane
+output: Got 7 hits
+
+Input: birds plane
+output: Got 91 hits
+
+Field queries:
+
+Input: channel:1
+output: Got 7 hits
+
+Input: type:wav
+output: Got 769 hits
