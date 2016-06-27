@@ -106,12 +106,163 @@ are passed to feeder.</li>
 indexes for the features. Further PeragroClient API(s) provides method for
 quering(search) the indexes. Kibana is used to visualize, analyze and search
 the data in GUI.</p>
+</div>
+<div class="section" id="the-outline-of-the-work">
+<h2>The outline of the work<a class="headerlink" href="#the-outline-of-the-work" title="Permalink to this headline">¶</a></h2>
+<p>Work was divided into the following steps:</p>
+<ul class="simple">
+<li>Requirements gathering</li>
+<li>dataset creation</li>
+<li>feature extraction</li>
+<li>building index</li>
+<li>building client search api(s)</li>
+<li>visualization of indexed data</li>
+</ul>
+<div class="section" id="dataset-creation">
+<h3>Dataset creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">¶</a></h3>
+<p>There are two ways of feeding data to the system which has been tested.</p>
+<ul class="simple">
+<li>AcousticBrainz data</li>
+<li>created dataset</li>
+</ul>
+<p><strong>AcousticBrainz data</strong>: It is a dump of 10+ GB of highlevel data and 40+ GB of
+lowlevel data.</p>
+<p>It can be downloaded from <a class="reference external" href="http://acousticbrainz.org/download">http://acousticbrainz.org/download</a></p>
+<p>This dataset contains already extracted features which was good to test initial
+build of the system. Huge amount of data provided a good base for testing
+scalibity and performance of the system.</p>
+<p><strong>created dataset</strong>: This dataset was created by downloading audio from
+<cite>freesound.org</cite> by doing tagsearch using the <cite>freesound-python</cite> api(s). It also
+contains the initial set of meta data provided by the freesound.</p>
+<p>It has around 6 GB of data. Each audio file is of duration 10 second.</p>
+<p>This dataset is used for testing is phase I as well as in further phases.
+Feature extraction is done on this dataset and then the features were indexed.</p>
+<p>To know more about how this data was created: see Audio dataset creation
+section in the content.</p>
+</div>
+<div class="section" id="feature-extraction">
+<h3>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h3>
+<p>Features are extracted from the audio files using the binaries provided by
+essentia toolkit.</p>
+<p>These binaries are placed in the <cite>src/bin</cite> directory.</p>
+<p><cite>extractor</cite> module contains the <cite>FeatureExtractor</cite> class which is responsible
+for providing methods for extracting features from audio files.</p>
+<p><cite>Input</cite>: Input is audio files or directory containing audio files.</p>
+<p><cite>output</cite>: extracted features written to json files.</p>
+<p>A demo code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">extractor</span> <span class="kn">import</span> <span class="n">FeatureExtractor</span>
+
+<span class="n">type_</span> <span class="o">=</span> <span class="s">&quot;gen&quot;</span>
+<span class="n">fe</span> <span class="o">=</span> <span class="n">FeatureExtractor</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span>
+
+<span class="c"># extract features for single audio</span>
+<span class="n">fe</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">inputFilePath</span><span class="p">,</span> <span class="n">outFilePath</span><span class="p">)</span>
+
+<span class="c"># extract features for multiple audio with extension ext inside source_dir</span>
+<span class="c"># and write features files to output_dir</span>
+<span class="n">fe</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">source_dir</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more details visit API(s) section in the content.</p>
+</div>
+<div class="section" id="building-index">
+<h3>Building Index<a class="headerlink" href="#building-index" title="Permalink to this headline">¶</a></h3>
+<p><cite>feed</cite> module is built for building index. It provides <cite>Feeder</cite> class that has
+different methods for feeding data to elasticsearch index. For details about
+the api(s) provided, please refer to API(s) documentation of Peragro AT in the
+content section</p>
+<p>Also, look at the example code provided in <cite>examples/demo.py</cite> to know how these
+api(s) are used.</p>
+<p>A demo code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">feed</span> <span class="kn">import</span> <span class="n">Feeder</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Feeder</span><span class="p">()</span>
+
+<span class="c"># feed single feature file for index creation</span>
+<span class="n">f</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">jsonFile</span><span class="p">,</span> <span class="n">cont_id</span><span class="p">,</span> <span class="n">iname</span><span class="o">=</span><span class="s">&#39;audio_index&#39;</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&#39;audio&#39;</span><span class="p">)</span>
+
+<span class="c"># feed all features file in a directory</span>
+<span class="n">f</span><span class="o">.</span><span class="n">feedAll</span><span class="p">(</span><span class="n">jsonDir</span><span class="p">,</span> <span class="n">iname</span><span class="o">=</span><span class="s">&#39;audio_index&#39;</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&#39;audio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-search-api-s">
+<h3>Making Search API(s)<a class="headerlink" href="#making-search-api-s" title="Permalink to this headline">¶</a></h3>
+<p>Search API(s) are provided by the <cite>PeragroClient</cite> class in the <cite>peragro</cite> module.
+Currently it provides <cite>id-based</cite> and <cite>text based</cite> search. In later stage it
+will provide similarity measure, filter search, audio-fingerprint etc.</p>
+<p>Look at the API(s) documentation in the content section for more details. Also,
+view <cite>examples/demo.py</cite> and <cite>examples/README</cite> to understand how it&#8217;s used.</p>
+</div>
+<div class="section" id="visualization-of-indexed-data">
+<h3>Visualization of Indexed data<a class="headerlink" href="#visualization-of-indexed-data" title="Permalink to this headline">¶</a></h3>
+<p>Indexed data can be visualized, analysed and also queried using Kibana GUI.
+You need to install Kibana and then point the index-name to kibana indexed
+pattern.</p>
+<p>Details to do this can be found at <cite>Audio Data Visualization/Analytics Using
+Kibana</cite> section of the content.</p>
+</div>
+</div>
+<div class="section" id="steps-for-demo">
+<h2>Steps for Demo<a class="headerlink" href="#steps-for-demo" title="Permalink to this headline">¶</a></h2>
+<p>Created dataset(freefield) will be used as our audio database.</p>
+<p>Following are the operations performed.</p>
+<ul class="simple">
+<li>create dataset/ Download dataset (I have given dropbox link below)</li>
+<li>Run feature extractor</li>
+<li>Run index builder</li>
+<li>make queries</li>
+</ul>
+<div class="section" id="download-dataset">
+<h3>Download dataset<a class="headerlink" href="#download-dataset" title="Permalink to this headline">¶</a></h3>
+<p>Download dataset form here
+<a class="reference external" href="https://www.dropbox.com/s/zvwf2u69zfvi2yj/my_data.tar.gz?dl=0">https://www.dropbox.com/s/zvwf2u69zfvi2yj/my_data.tar.gz?dl=0</a></p>
+</div>
+<div class="section" id="id1">
+<h3>Feature extraction<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This is done using <cite>FeatureExtractor</cite> class provided in <cite>extractor</cite> module</p>
+</div>
+<div class="section" id="index-builder">
+<h3>Index builder<a class="headerlink" href="#index-builder" title="Permalink to this headline">¶</a></h3>
+<p>Done by using <cite>Feeder</cite> class provided in <cite>feed</cite> module</p>
+</div>
+<div class="section" id="making-queries">
+<h3>Making queries<a class="headerlink" href="#making-queries" title="Permalink to this headline">¶</a></h3>
+<p>Done by using <cite>PeragroClient</cite> module provided in <cite>peragro</cite> module.</p>
+</div>
+<div class="section" id="run-demo">
+<h3>Run demo<a class="headerlink" href="#run-demo" title="Permalink to this headline">¶</a></h3>
+<p><cite>main.py</cite> file is provided in the <cite>src</cite> directory which does all of the above
+steps.</p>
+<p>Type the following command under <cite>src</cite> directory:</p>
+<p>Where <cite>source_dir</cite> is the path of <cite>created dataset</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">After downloading the dataset extract the files.</p>
+</div>
+<p>similarly extract the files inside <cite>my_data</cite> too.</p>
+<p>Once the index is created by <cite>main.py</cite> you can visualize the data by Kibana
+by pointing your browser to:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>http://localhost:5601
+</pre></div>
+</div>
+<p>make sure that kibana is installed before doing above otherwise, go through the
+topic &#8216;Audio data visualization&#8217; in the content to install and learn about
+kibana.</p>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation Instruction for PAIRS</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#dependency-requirements">Dependency requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#installing-dependencies">Installing dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Audio dataset creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#file-formats-and-layout">FILE FORMATS AND LAYOUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#get-sound-module">get_sound module:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#snippetmaker-module">snippetmaker module:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#installing-dependencies">Installing dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#procedure-to-run-the-modules">Procedure to run the modules</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visualize.html">Audio Data Visualization/Analytics Using Kibana</a><ul>
@@ -134,6 +285,7 @@ the data in GUI.</p>
 </ul>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -162,6 +314,22 @@ the data in GUI.</p>
 </li>
 <li><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
 <li><a class="reference internal" href="#phase-i-architecture-design">Phase I Architecture Design</a></li>
+<li><a class="reference internal" href="#the-outline-of-the-work">The outline of the work</a><ul>
+<li><a class="reference internal" href="#dataset-creation">Dataset creation</a></li>
+<li><a class="reference internal" href="#feature-extraction">Feature extraction</a></li>
+<li><a class="reference internal" href="#building-index">Building Index</a></li>
+<li><a class="reference internal" href="#making-search-api-s">Making Search API(s)</a></li>
+<li><a class="reference internal" href="#visualization-of-indexed-data">Visualization of Indexed data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#steps-for-demo">Steps for Demo</a><ul>
+<li><a class="reference internal" href="#download-dataset">Download dataset</a></li>
+<li><a class="reference internal" href="#id1">Feature extraction</a></li>
+<li><a class="reference internal" href="#index-builder">Index builder</a></li>
+<li><a class="reference internal" href="#making-queries">Making queries</a></li>
+<li><a class="reference internal" href="#run-demo">Run demo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

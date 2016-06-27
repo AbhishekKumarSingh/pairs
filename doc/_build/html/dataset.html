@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Audio dataset creation &mdash; pairs 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pairs 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Audio Data Visualization/Analytics Using Kibana" href="visualize.html" />
+    <link rel="prev" title="Installation Instruction for PAIRS" href="install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="visualize.html" title="Audio Data Visualization/Analytics Using Kibana"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation Instruction for PAIRS"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pairs 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="audio-dataset-creation">
+<h1>Audio dataset creation<a class="headerlink" href="#audio-dataset-creation" title="Permalink to this headline">¶</a></h1>
+<p>Dataset is created using the scripts in the <cite>data_gen</cite> directoy. Based on tag search audio is searched and downloaded from the [freesound](<a class="reference external" href="http://freesound.org">http://freesound.org</a>) along with their metadata. And then produced 10-second snippets from each one, as long as they matches the requirements. Data were also sampled from the downloaded set.</p>
+<p>This dataset contains 7690 10-second audio files in a standardised format,
+extracted from contributions on the Freesound archive which were labelled with
+the &#8220;field-recording&#8221; tag. Note that the original tagging (as well as the audio
+submission) is crowdsourced, so the dataset is not guaranteed to consist purely
+of &#8220;field recordings&#8221; as might be defined by practitioners. The intention is to
+represent the content of an archive collection on such a topic, rather than to
+represent a controlled definition of such a topic.</p>
+<p>Each audio file has a corresponding text file, containing metadata such as
+author and tags.
+The dataset has been randomly split into 10 equal-size subsets. This is so that
+you can perform 10-fold crossvalidation in machine-learning experiments, or can
+use fixed subsets of the data (e.g. use one subset for development, and others
+for later validation). Each of the 10 subsets has about 128 minutes of audio;
+the dataset totals over 21 hours of audio.</p>
+<div class="section" id="file-formats-and-layout">
+<h2>FILE FORMATS AND LAYOUT<a class="headerlink" href="#file-formats-and-layout" title="Permalink to this headline">¶</a></h2>
+<p>The dataset is partitioned into 10 subsets with an equal number of audio files
+in each. You may have these as zipfiles or as folders, named 01 02 03 04 05 06
+07 08 09 10.</p>
+<p>Each .wav file contained within has a numeric ID as a filename, which
+corresponds to the ID of the original audio file held in the Freesound archive.
+Note that the .wav file is NOT the same as the one on Freesound - it has been
+excerpted and standardised. Each .wav file is 10 seconds long, WAV, mono,
+sample rate 44.1 kHz, 16-bit PCM, amplitude normalised. The numeric ID used for
+filenames does not have a fixed number of digits but is as many as 6-digit.</p>
+<p>Each .wav file also has a corresponding .json file, which is simply the
+metadata reported by the Freesound server while fetching the original audio.
+Notable keys are:</p>
+<ul class="simple">
+<li>user: the username and url for the Freesound user who uploaded this particular
+audio file. The copyright in the audio file remains with them.</li>
+<li>license: the license of the audio file.</li>
+<li>tags: the list of tags associated with the file. &#8220;field-recording&#8221; will be but one.</li>
+<li>id: the Freesound ID - should match filename.</li>
+<li>url: a URL that takes you to the Freesound item page.</li>
+<li>geotag: a lat/lon pair indicating geolocation. Roughly one-third of the files
+include this tag - availability of geotag was not a criterion for constructing the dataset.</li>
+</ul>
+<p>The JSON data includes fields such as &#8220;channels&#8221;, &#8220;duration&#8221;,
+&#8220;samplerate&#8221; - these refer to the original audio contribution,
+and not to the excerpt included here.</p>
+</div>
+<div class="section" id="get-sound-module">
+<h2>get_sound module:<a class="headerlink" href="#get-sound-module" title="Permalink to this headline">¶</a></h2>
+<p>This module is responsible for getting sound and their metadata based on tagsearch results from freesound.org. Metadata is stored in json file format. File format is like metadata for audio having id as <cite>12345</cite> has its metadata stored in <cite>12345.json</cite> file.</p>
+</div>
+<div class="section" id="snippetmaker-module">
+<h2>snippetmaker module:<a class="headerlink" href="#snippetmaker-module" title="Permalink to this headline">¶</a></h2>
+<p>This module is responsible for generating 10-second snippets from each one of the downloaded audios.</p>
+</div>
+<div class="section" id="installing-dependencies">
+<h2>Installing dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">make virtual environment inside <cite>data_gen</cite> directory:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>virtualenv env
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">activate virtual environment</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source </span>env/bin/activate
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">install requirements form <cite>requirements.txt</cite></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install requirements.txt
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">clone freesound python bindings <cite>freesound-python</cite></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/danstowell/freesound-python
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">install <cite>freesound-python</cite> inside virtual environment</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="c"># when your virtual environment is active</span>
+<span class="nv">$ </span>python setup.py install
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="procedure-to-run-the-modules">
+<h2>Procedure to run the modules<a class="headerlink" href="#procedure-to-run-the-modules" title="Permalink to this headline">¶</a></h2>
+<p><cite>Note</cite>: module get_sound.py performs heavy hits on freesound server. please take permission from freesound before hand.</p>
+<div class="section" id="get-freesound-api-token">
+<h3>Get freesound api token<a class="headerlink" href="#get-freesound-api-token" title="Permalink to this headline">¶</a></h3>
+<p>To authenticate API calls with the token strategy you’ll need to create a Freesound account (if you don’t have one yet!) and request a new API credential by visiting <a class="reference external" href="http://www.freesound.org/apiv2/apply">http://www.freesound.org/apiv2/apply</a>. In this page you’ll see a table with all API credentials you have requested plus some other information. You should use the keys in ‘Client secret/Api key’ column, which are long alphanumeric strings. You should get a different API key for every application you develop.</p>
+</div>
+<div class="section" id="add-freesound-client-api-key">
+<h3>Add freesound client api key<a class="headerlink" href="#add-freesound-client-api-key" title="Permalink to this headline">¶</a></h3>
+<p>replace null string with acutal client_api_key in <cite>local_data.py</cite></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">freesound_api_key</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">client_api_key</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="run-modules">
+<h3>Run modules<a class="headerlink" href="#run-modules" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python get_sound.py
+<span class="nv">$ </span>python snippetmaker.py
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Audio dataset creation</a><ul>
+<li><a class="reference internal" href="#file-formats-and-layout">FILE FORMATS AND LAYOUT</a></li>
+<li><a class="reference internal" href="#get-sound-module">get_sound module:</a></li>
+<li><a class="reference internal" href="#snippetmaker-module">snippetmaker module:</a></li>
+<li><a class="reference internal" href="#installing-dependencies">Installing dependencies</a></li>
+<li><a class="reference internal" href="#procedure-to-run-the-modules">Procedure to run the modules</a><ul>
+<li><a class="reference internal" href="#get-freesound-api-token">Get freesound api token</a></li>
+<li><a class="reference internal" href="#add-freesound-client-api-key">Add freesound client api key</a></li>
+<li><a class="reference internal" href="#run-modules">Run modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation Instruction for PAIRS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="visualize.html"
+                        title="next chapter">Audio Data Visualization/Analytics Using Kibana</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/dataset.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="visualize.html" title="Audio Data Visualization/Analytics Using Kibana"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation Instruction for PAIRS"
+             >previous</a> |</li>
+        <li><a href="index.html">pairs 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Abhishek Singh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

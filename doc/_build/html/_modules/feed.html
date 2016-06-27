@@ -58,6 +58,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">elasticsearch</span> <span class="kn">import</span> <span class="n">Elasticsearch</span>
+<span class="kn">from</span> <span class="nn">util.helper</span> <span class="kn">import</span> <span class="n">convertToFloat</span>
 
 
 <div class="viewcode-block" id="Feeder"><a class="viewcode-back" href="../source_code.html#feed.Feeder">[docs]</a><span class="k">class</span> <span class="nc">Feeder</span><span class="p">:</span>
@@ -85,6 +86,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">jsonFile</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jf</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s">&#39;tonal&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s">&#39;thpcp&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">]:</span>
+                    <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;thpcp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convertToFloat</span><span class="p">(</span>
+                        <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;thpcp&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="s">&#39;chords_histogram&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">]:</span>
+                    <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;chords_histogram&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convertToFloat</span><span class="p">(</span>
+                        <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;chords_histogram&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="s">&#39;hpcp&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">]:</span>
+                    <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;hpcp&#39;</span><span class="p">][</span><span class="s">&#39;max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convertToFloat</span><span class="p">(</span>
+                        <span class="n">content</span><span class="p">[</span><span class="s">&#39;tonal&#39;</span><span class="p">][</span><span class="s">&#39;hpcp&#39;</span><span class="p">][</span><span class="s">&#39;max&#39;</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">content</span>
 </div>
 <div class="viewcode-block" id="Feeder.feed"><a class="viewcode-back" href="../source_code.html#feed.Feeder.feed">[docs]</a>    <span class="k">def</span> <span class="nf">feed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jsonFile</span><span class="p">,</span> <span class="n">cont_id</span><span class="p">,</span> <span class="n">iname</span><span class="o">=</span><span class="s">&quot;audio_index&quot;</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&quot;audio&quot;</span><span class="p">):</span>
