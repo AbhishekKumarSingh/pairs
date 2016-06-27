@@ -203,8 +203,8 @@ pattern.</p>
 Kibana</cite> section of the content.</p>
 </div>
 </div>
-<div class="section" id="steps-for-demo">
-<h2>Steps for Demo<a class="headerlink" href="#steps-for-demo" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="steps-to-run-main-module">
+<h2>Steps to run <cite>main</cite> module<a class="headerlink" href="#steps-to-run-main-module" title="Permalink to this headline">¶</a></h2>
 <p>Created dataset(freefield) will be used as our audio database.</p>
 <p>Following are the operations performed.</p>
 <ul class="simple">
@@ -255,6 +255,50 @@ by pointing your browser to:</p>
 <p>make sure that kibana is installed before doing above otherwise, go through the
 topic &#8216;Audio data visualization&#8217; in the content to install and learn about
 kibana.</p>
+</div>
+</div>
+<div class="section" id="steps-to-run-example-code">
+<h2>Steps to run example code<a class="headerlink" href="#steps-to-run-example-code" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="instruction">
+<h3>Instruction<a class="headerlink" href="#instruction" title="Permalink to this headline">¶</a></h3>
+<p>To run the demo code, enter the following command</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python demo.py example_data
+</pre></div>
+</div>
+<p>examples_data directory contains 769 json files containing features for
+different audios.</p>
+<p>Query can be done by either giving an id or by giving text.</p>
+</div>
+</div>
+<div class="section" id="some-sample-queries">
+<h2>Some sample queries<a class="headerlink" href="#some-sample-queries" title="Permalink to this headline">¶</a></h2>
+<p>some sample queries are:</p>
+<div class="highlight-bash"><div class="highlight"><pre>Queries by id:
+
+Input: 155249
+output: 155249 found
+
+Input: 155234567
+output: 155234567 not found
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre>Queries by text:
+
+Input: birds
+output: Got 87 hits
+
+Input: plane
+output: Got 7 hits
+
+Input: birds plane
+output: Got 91 hits
+
+Field queries:
+
+Input: channel:1
+output: Got 7 hits
+</pre></div>
+</div>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -294,7 +338,6 @@ kibana.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -328,7 +371,7 @@ kibana.</p>
 <li><a class="reference internal" href="#visualization-of-indexed-data">Visualization of Indexed data</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#steps-for-demo">Steps for Demo</a><ul>
+<li><a class="reference internal" href="#steps-to-run-main-module">Steps to run <cite>main</cite> module</a><ul>
 <li><a class="reference internal" href="#download-dataset">Download dataset</a></li>
 <li><a class="reference internal" href="#id1">Feature extraction</a></li>
 <li><a class="reference internal" href="#index-builder">Index builder</a></li>
@@ -336,6 +379,11 @@ kibana.</p>
 <li><a class="reference internal" href="#run-demo">Run demo</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#steps-to-run-example-code">Steps to run example code</a><ul>
+<li><a class="reference internal" href="#instruction">Instruction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#some-sample-queries">Some sample queries</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

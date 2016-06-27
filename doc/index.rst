@@ -194,8 +194,8 @@ Details to do this can be found at `Audio Data Visualization/Analytics Using
 Kibana` section of the content.
 
 
-Steps for Demo
---------------
+Steps to run `main` module
+---------------------------
 
 Created dataset(freefield) will be used as our audio database.
 
@@ -263,6 +263,63 @@ by pointing your browser to:
 make sure that kibana is installed before doing above otherwise, go through the
 topic 'Audio data visualization' in the content to install and learn about
 kibana.
+
+
+Steps to run example code
+----------------------------
+
+Instruction
+************
+
+To run the demo code, enter the following command
+
+.. code-block:: bash
+
+    $ python demo.py example_data
+
+
+examples_data directory contains 769 json files containing features for
+different audios.
+
+
+Query can be done by either giving an id or by giving text.
+
+
+Some sample queries
+--------------------
+
+some sample queries are:
+
+
+.. code-block:: bash
+
+    Queries by id:
+
+    Input: 155249
+    output: 155249 found
+
+    Input: 155234567
+    output: 155234567 not found
+
+
+.. code-block:: bash
+
+    Queries by text:
+
+    Input: birds
+    output: Got 87 hits
+
+    Input: plane
+    output: Got 7 hits
+
+    Input: birds plane
+    output: Got 91 hits
+
+    Field queries:
+
+    Input: channel:1
+    output: Got 7 hits
+
 
 
 
