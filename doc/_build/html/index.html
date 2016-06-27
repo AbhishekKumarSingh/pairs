@@ -130,7 +130,7 @@ lowlevel data.</p>
 <p>It can be downloaded from <a class="reference external" href="http://acousticbrainz.org/download">http://acousticbrainz.org/download</a></p>
 <p>This dataset contains already extracted features which was good to test initial
 build of the system. Huge amount of data provided a good base for testing
-scalibity and performance of the system.</p>
+scalibity and performance of the system. Feeding this data takes lot of time.</p>
 <p><strong>created dataset</strong>: This dataset was created by downloading audio from
 <cite>freesound.org</cite> by doing tagsearch using the <cite>freesound-python</cite> api(s). It also
 contains the initial set of meta data provided by the freesound.</p>
@@ -235,10 +235,16 @@ Kibana</cite> section of the content.</p>
 <p><cite>main.py</cite> file is provided in the <cite>src</cite> directory which does all of the above
 steps.</p>
 <p>Type the following command under <cite>src</cite> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python main.py &lt;source_dir&gt;
+</pre></div>
+</div>
 <p>Where <cite>source_dir</cite> is the path of <cite>created dataset</cite>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">After downloading the dataset extract the files.</p>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>tar -xvf my_data
+</pre></div>
 </div>
 <p>similarly extract the files inside <cite>my_data</cite> too.</p>
 <p>Once the index is created by <cite>main.py</cite> you can visualize the data by Kibana

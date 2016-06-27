@@ -94,7 +94,7 @@ It can be downloaded from http://acousticbrainz.org/download
 
 This dataset contains already extracted features which was good to test initial
 build of the system. Huge amount of data provided a good base for testing
-scalibity and performance of the system.
+scalibity and performance of the system. Feeding this data takes lot of time.
 
 **created dataset**: This dataset was created by downloading audio from
 `freesound.org` by doing tagsearch using the `freesound-python` api(s). It also
@@ -236,6 +236,7 @@ steps.
 Type the following command under `src` directory:
 
 .. code-block:: bash
+
     $ python main.py <source_dir>
 
 
@@ -246,6 +247,7 @@ Where `source_dir` is the path of `created dataset`.
     After downloading the dataset extract the files.
 
 .. code-block:: bash
+
     $ tar -xvf my_data
 
 similarly extract the files inside `my_data` too.
