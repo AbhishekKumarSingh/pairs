@@ -8,6 +8,7 @@ which eventually creates and stores index of all extracted features.
 import os
 import json
 from elasticsearch import Elasticsearch
+from util.helper import convertToFloat
 
 
 class Feeder:
@@ -35,6 +36,16 @@ class Feeder:
         """
         with open(jsonFile, 'r') as jf:
             content = json.load(jf)
+            if 'tonal' in content:
+                if 'thpcp' in content['tonal']:
+                    content['tonal']['thpcp'] = convertToFloat(
+                        content['tonal']['thpcp'])
+                if 'chords_histogram' in content['tonal']:
+                    content['tonal']['chords_histogram'] = convertToFloat(
+                        content['tonal']['chords_histogram'])
+                if 'hpcp' in content['tonal']:
+                    content['tonal']['hpcp']['max'] = convertToFloat(
+                        content['tonal']['hpcp']['max'])
             return content
 
     def feed(self, jsonFile, cont_id, iname="audio_index", doc_type="audio"):
